@@ -1,22 +1,21 @@
-
-data "aws_ssm_parameter" "vpn_sg_id" {
-  # /expense/dev/vpn_sg_id
-  name = "/${var.project_name}/${var.environment}/vpn_sg_id"
+data "aws_ssm_parameter" "backend_sg_id" {
+  # /expense/dev/backend_sg_id
+  name = "/${var.project_name}/${var.environment}/backend_sg_id"
 }
 
-data "aws_ssm_parameter" "public_subnet_ids" {
-  # /expense/dev/public_subnet_ids
-  name = "/${var.project_name}/${var.environment}/public_subnet_ids"
+data "aws_ssm_parameter" "private_subnet_ids" {
+  # /expense/dev/private_subnet_ids
+  name = "/${var.project_name}/${var.environment}/private_subnet_ids"
 }
 
 #Data sources allow Terraform to use information defined outside of Terraform, defined by another separate Terraform configuration, or modified by functions.
 data "aws_ami" "joindevops" {
   most_recent = true
-  owners      = ["679593333241"]
+  owners      = ["973714476881"]
 
   filter {
     name   = "name"
-    values = ["OpenVPN Access Server Community Image-fe8020db-*"]
+    values = ["RHEL-9-DevOps-Practice"]
   }
 
   filter {

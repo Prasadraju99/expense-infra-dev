@@ -5,7 +5,7 @@ resource "aws_key_pair" "openvpn" {
 
 module "vpn" {
   source = "terraform-aws-modules/ec2-instance/aws"
-  key_name = aws_key_pair.openvpn.key_name  
+  key_name = aws_key_pair.openvpn.key_name  # ssh -i ~/.ssh/openvpn openvpnas@ipaddress
   ami  = data.aws_ami.joindevops.id
   name = local.resource_name
 
