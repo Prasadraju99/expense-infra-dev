@@ -9,7 +9,7 @@ terraform {
     bucket         = "evp-remote-state"
     key            = "expense-dev-sg"
     region         = "us-east-1"
-    dynamodb_table = "oct-locking"
+    dynamodb_table = "dec-locking"
   }
 }
 provider "aws" {
