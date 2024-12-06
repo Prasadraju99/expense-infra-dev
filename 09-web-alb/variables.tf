@@ -15,12 +15,12 @@ variable "common_tags" {
   }
 }
 
-variable "backend_tags" {
-  default = {
-    Component = "backend"
-  }
-}
-
 variable "zone_name" {
   default = "prasadking.xyz"
+}
+
+variable "web_alb_tags" {
+  default = {
+    component = "web-alb"
+  }
 }

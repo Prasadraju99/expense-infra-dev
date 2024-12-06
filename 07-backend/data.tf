@@ -13,7 +13,12 @@ data "aws_ssm_parameter" "vpc_id" {
   name = "/${var.project_name}/${var.environment}/vpc_id"
 }
 
-#Data sources allow Terraform to use information defined outside of Terraform, defined by another separate Terraform configuration, or modified by functions.
+data "aws_ssm_parameter" "app_alb_listener_arn" {
+  # /expense/dev/app_alb_listener_arn
+  name  = "/${var.project_name}/${var.environment}/app_alb_listener_arn"
+}
+
+# Data sources allow Terraform to use information defined outside of Terraform, defined by another separate Terraform configuration, or modified by functions.
 data "aws_ami" "joindevops" {
   most_recent = true
   owners      = ["973714476881"]
