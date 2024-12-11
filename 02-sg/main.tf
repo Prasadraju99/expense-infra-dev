@@ -286,3 +286,33 @@ resource "aws_security_group_rule" "web_alb_https" {
   cidr_blocks = ["0.0.0.0/0"]
   security_group_id        = module.web_alb_sg.id
 }
+
+# frontend allowing connection on 22 from the vpn
+resource "aws_security_group_rule" "frontend_vpn" {
+  type                     = "ingress"
+  from_port                = 22
+  to_port                  = 22
+  protocol                 = "tcp"
+  source_security_group_id = module.vpn_sg.id
+  security_group_id        = module.frontend_sg.id
+}
+
+# web_alb allowing connection on 80 from the vpn to access frontend_web_alb
+resource "aws_security_group_rule" "frontend_web_alb" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = module.web_alb_sg.id
+  security_group_id        = module.frontend_sg.id
+}
+
+# app_alb allowing connection on 80 from the vpn to access app_alb_frontend
+resource "aws_security_group_rule" "app_alb_frontend" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = module.frontend_sg.id
+  security_group_id        = module.app_alb_sg.id
+}
